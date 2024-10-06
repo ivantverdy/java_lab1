@@ -6,11 +6,11 @@ public abstract class Stone {
     private double cost;
     private double purity;
 
-    public Stone(String name, double carat, double cost, double clarity) {
+    public Stone(String name, double carat, double cost, double purity) {
         this.name = name;
         this.carat = carat;
         this.cost = cost;
-        this.purity = clarity;
+        this.purity = purity;
     }
 
     public String getName() {
