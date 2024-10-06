@@ -1,12 +1,12 @@
 package com.lab1.stone;
 
 public class SemiPreciousStone extends Stone {
-    public SemiPreciousStone(String name, double carat, double cost, double purity) {
-        super(name, carat, cost, purity);
+    public SemiPreciousStone(String name, double carat, double purity) {
+        super(name, carat, purity);
     }
 
     @Override
     public double calculateValue() {
-        return getCarat() * getCost() * getPurity();
+        return getCarat() * getPurity();
     }
 }

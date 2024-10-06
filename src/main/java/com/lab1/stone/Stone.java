@@ -3,13 +3,11 @@ package com.lab1.stone;
 public abstract class Stone {
     private String name;
     private double carat;
-    private double cost;
     private double purity;
 
-    public Stone(String name, double carat, double cost, double purity) {
+    public Stone(String name, double carat, double purity) {
         this.name = name;
         this.carat = carat;
-        this.cost = cost;
         this.purity = purity;
     }
 
@@ -21,10 +19,6 @@ public abstract class Stone {
         return carat;
     }
 
-    public double getCost() {
-        return cost;
-    }
-
     public double getPurity() {
         return purity;
     }
@@ -33,6 +27,6 @@ public abstract class Stone {
 
     @Override
     public String toString() {
-        return "Stone: name=" + name + ", carat=" + carat + ", cost=" + cost + ", purity=" + purity + ".";
+        return "Stone: name=" + name + ", carat=" + carat + ", purity=" + purity + ".";
     }
 }

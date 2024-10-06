@@ -3,8 +3,8 @@ package com.lab1.stone;
 public class PreciousStone extends Stone {
     private double rarity;
 
-    public PreciousStone(String name, double carat, double cost, double purity, double rarity) {
-        super(name, carat, cost, purity);
+    public PreciousStone(String name, double carat, double purity, double rarity) {
+        super(name, carat, purity);
         this.rarity = rarity;
     }
 
@@ -14,6 +14,6 @@ public class PreciousStone extends Stone {
 
     @Override
     public double calculateValue() {
-        return getCarat() * getCost() * getPurity() * getRarity();
+        return getCarat() * getPurity() * getRarity();
     }
 }
