@@ -6,6 +6,9 @@ import java.util.List;
 
 import com.lab1.stone.Stone;
 
+import com.lab1.database.DB;
+import java.sql.*;
+
 public class Necklace {
     private List<Stone> stones;
 
@@ -37,5 +40,10 @@ public class Necklace {
             }
         }
         return stonesInRange;
+    }
+
+    public void saveToDb(){
+        Connection conn = DB.getConnection();
+
     }
 }
