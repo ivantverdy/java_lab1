@@ -25,8 +25,4 @@ public abstract class Stone {
 
     public abstract double calculateValue();
 
-    @Override
-    public String toString() {
-        return "Stone: name=" + name + ", carat=" + carat + ", purity=" + purity + ".";
-    }
 }

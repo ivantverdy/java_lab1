@@ -7,6 +7,11 @@ public class SemiPreciousStone extends Stone {
 
     @Override
     public double calculateValue() {
-        return getCarat() * getPurity();
+        return getCarat() * getPurity() * 1000;
+    }
+
+    @Override
+    public String toString() {
+        return "Stone: name = " + getName() + ", carat = " + getCarat() + ", purity = " + getPurity() + ", value = " + calculateValue();
     }
 }

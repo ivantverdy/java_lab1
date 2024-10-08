@@ -14,6 +14,11 @@ public class PreciousStone extends Stone {
 
     @Override
     public double calculateValue() {
-        return getCarat() * getPurity() * getRarity();
+        return getCarat() * getPurity() * getRarity() * 10000;
+    }
+
+    @Override
+    public String toString() {
+        return "Stone: name = " + getName() + ", carat = " + getCarat() + ", purity = " + getPurity() + ", value = " + calculateValue();
     }
 }
