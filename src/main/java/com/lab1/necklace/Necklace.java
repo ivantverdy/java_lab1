@@ -69,31 +69,35 @@ public class Necklace {
                     ps.setString(6, "Semi Precious Stone");
                     ps.setDouble(7, spst.calculateValue());
                 }
-
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void getFromDb() {
+    public List<Stone> getFromDb() {
         String query = "SELECT * FROM stones";
+        List<Stone> stones = new ArrayList<>();
         try (Connection conn = DB.getConnection(); PreparedStatement ps = conn.prepareStatement(query); ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
-                Integer id = rs.getInt("id");
+                //Integer id = rs.getInt("id");
                 String name = rs.getString("name");
                 double carat = rs.getDouble("carat");
                 double purity = rs.getDouble("purity");
-                if (Objects.equals(name, "Semi Precious Stone")) {
-                    double rarity = java.sql.Types.DOUBLE;
-                } else {
-                    double rarity = rs.getDouble("rarity");
-                }
                 String type = rs.getString("type");
-                double value = rs.getDouble("value");
+                if("Precious Stone".equals(type)) {
+                    SemiPreciousStone semiPreciousStone = new SemiPreciousStone(name, carat, purity);
+                    stones.add(semiPreciousStone);
+                }
+                else {
+                    double rarity = rs.getDouble("rarity");
+                    PreciousStone preciousStone = new PreciousStone(name, carat, purity, rarity);
+                    stones.add(preciousStone);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return stones;
     }
 }

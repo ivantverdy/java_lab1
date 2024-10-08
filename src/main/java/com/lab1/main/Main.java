@@ -4,6 +4,7 @@ import com.lab1.necklace.Necklace;
 import com.lab1.stone.SemiPreciousStone;
 import com.lab1.stone.PreciousStone;
 import com.lab1.stone.Stone;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -32,10 +33,10 @@ public class Main {
 
         necklace.saveToDb();
 
-        Necklace loadedNecklace = new Necklace();
-        loadedNecklace.getFromDb();
+        Necklace dbStones = new Necklace();
+        dbStones.getFromDb();
         System.out.println("Stones from db: ");
-        for (Stone stone : loadedNecklace.getStones()) {
+        for (Stone stone : dbStones.getFromDb()) {
             System.out.println(stone);
         }
     }
