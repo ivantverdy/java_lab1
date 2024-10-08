@@ -10,11 +10,15 @@ import com.lab1.stone.Stone;
 
 import com.lab1.database.DB;
 
-import javax.lang.model.type.NullType;
 import java.sql.*;
+import java.util.Objects;
 
 public class Necklace {
     private List<Stone> stones;
+
+    public List<Stone> getStones() {
+        return stones;
+    }
 
     public Necklace() {
         this.stones = new ArrayList<>();
@@ -65,6 +69,27 @@ public class Necklace {
                     ps.setString(7, "Semi Precious Stone");
                     ps.setDouble(8, spst.calculateValue());
                 }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void getFromDb() {
+        String query = "SELECT * FROM stones";
+        try (Connection conn = DB.getConnection(); Statement s = conn.prepareStatement(query); ResultSet rs = s.executeQuery(query)) {
+            while (rs.next()) {
+                Integer id = rs.getInt("id");
+                String name = rs.getString("name");
+                double carat = rs.getDouble("carat");
+                double purity = rs.getDouble("purity");
+                if (Objects.equals(name, "Semi Precious Stone")) {
+                    double rarity = java.sql.Types.DOUBLE;
+                } else {
+                    double rarity = rs.getDouble("rarity");
+                }
+                String type = rs.getString("type");
+                double value = rs.getDouble("value");
             }
         } catch (SQLException e) {
             e.printStackTrace();
