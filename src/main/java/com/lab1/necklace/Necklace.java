@@ -58,17 +58,18 @@ public class Necklace {
                 ps.setInt(1, id++);
                 ps.setString(2, stone.getName());
                 ps.setDouble(3, stone.getCarat());
+                ps.setDouble(4, stone.getPurity());
 
-                ps.setDouble(5, stone.getPurity());
                 if (stone instanceof PreciousStone pst) {
-                    ps.setDouble(6, pst.getRarity());
-                    ps.setString(7, "Precious Stone");
-                    ps.setDouble(8, pst.calculateValue());
+                    ps.setDouble(5, pst.getRarity());
+                    ps.setString(6, "Precious Stone");
+                    ps.setDouble(7, pst.calculateValue());
                 } else if (stone instanceof SemiPreciousStone spst) {
-                    ps.setNull(6, java.sql.Types.DOUBLE);
-                    ps.setString(7, "Semi Precious Stone");
-                    ps.setDouble(8, spst.calculateValue());
+                    ps.setNull(5, java.sql.Types.DOUBLE);
+                    ps.setString(6, "Semi Precious Stone");
+                    ps.setDouble(7, spst.calculateValue());
                 }
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -77,7 +78,7 @@ public class Necklace {
 
     public void getFromDb() {
         String query = "SELECT * FROM stones";
-        try (Connection conn = DB.getConnection(); Statement s = conn.prepareStatement(query); ResultSet rs = s.executeQuery(query)) {
+        try (Connection conn = DB.getConnection(); PreparedStatement ps = conn.prepareStatement(query); ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 Integer id = rs.getInt("id");
                 String name = rs.getString("name");
