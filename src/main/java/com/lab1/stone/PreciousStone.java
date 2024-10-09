@@ -6,6 +6,7 @@ public class PreciousStone extends Stone {
     public PreciousStone(String name, double carat, double purity, double rarity) {
         super(name, carat, purity);
         this.rarity = rarity;
+        this.value = calculateValue();
     }
 
     public double getRarity() {

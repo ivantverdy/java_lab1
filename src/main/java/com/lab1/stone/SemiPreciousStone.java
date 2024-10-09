@@ -3,6 +3,7 @@ package com.lab1.stone;
 public class SemiPreciousStone extends Stone {
     public SemiPreciousStone(String name, double carat, double purity) {
         super(name, carat, purity);
+        this.value = calculateValue();
     }
 
     @Override

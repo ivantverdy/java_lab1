@@ -33,7 +33,7 @@ public class Necklace {
     }
 
     public double getCost() {
-        return stones.stream().mapToDouble(Stone::calculateValue).sum();
+        return stones.stream().mapToDouble(Stone::getValue).sum();
     }
 
     public void sortByValue() {
@@ -51,24 +51,27 @@ public class Necklace {
     }
 
     public void saveToDb() {
-        String query = "INSERT INTO stones(id, name, carat, purity, rarity, type, value) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO stones(name, carat, purity, rarity, type, value) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection conn = DB.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
-            int id = 1;
+            //int id = 1;
             for (Stone stone : stones) {
-                ps.setInt(1, id++);
-                ps.setString(2, stone.getName());
-                ps.setDouble(3, stone.getCarat());
-                ps.setDouble(4, stone.getPurity());
+                //ps.setInt(1, id++);
+                ps.setString(1, stone.getName());
+                ps.setDouble(2, stone.getCarat());
+                ps.setDouble(3, stone.getPurity());
+
 
                 if (stone instanceof PreciousStone pst) {
-                    ps.setDouble(5, pst.getRarity());
-                    ps.setString(6, "Precious Stone");
-                    ps.setDouble(7, pst.calculateValue());
+                    ps.setDouble(4, pst.getRarity());
+                    ps.setString(5, "Precious Stone");
                 } else if (stone instanceof SemiPreciousStone spst) {
-                    ps.setNull(5, java.sql.Types.DOUBLE);
-                    ps.setString(6, "Semi Precious Stone");
-                    ps.setDouble(7, spst.calculateValue());
+                    ps.setNull(4, java.sql.Types.DOUBLE);
+                    ps.setString(5, "Semi Precious Stone");
                 }
+
+                ps.setDouble(6, stone.getValue());
+
+                ps.executeUpdate();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -85,7 +88,7 @@ public class Necklace {
                 double carat = rs.getDouble("carat");
                 double purity = rs.getDouble("purity");
                 String type = rs.getString("type");
-                if("Precious Stone".equals(type)) {
+                if("Semi Precious Stone".equals(type)) {
                     SemiPreciousStone semiPreciousStone = new SemiPreciousStone(name, carat, purity);
                     stones.add(semiPreciousStone);
                 }
