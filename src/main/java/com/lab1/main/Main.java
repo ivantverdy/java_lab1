@@ -4,7 +4,6 @@ import com.lab1.necklace.Necklace;
 import com.lab1.stone.SemiPreciousStone;
 import com.lab1.stone.PreciousStone;
 import com.lab1.stone.Stone;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
